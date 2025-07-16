@@ -1,3 +1,5 @@
+import { addSeconds } from "date-fns";
+
 class ToDoItem {
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -85,6 +87,5 @@ class ManageProjects {
         return this.projects.map(obj => obj);
     }
 }
-
 
 export {ManageProjects, ToDoProject, ToDoItem};
