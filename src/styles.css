@@ -1,4 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    font-family: sans-serif;
+}
+
+main {
+    background-color: whitesmoke;
+    align-self: center;
+    height: 87dvh;
+    width: 55%;
+    padding: 2rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0;
+}
+
+.title-buttons {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.create-project {
+    border: 1px solid #0000003c;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.create-project {
+    height: 2.3rem;
+}
+
+.todo__projects-wrapper {
+    flex: 10 1 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-auto-rows: 1fr;
+}
+
+.todo__project {
+    position: relative;
+    background-color: #cacaca;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.project__button {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.todo__project h2 {
+    margin: 0;
+}
+
+.project__list {
+    padding: 0;
+    list-style: none;
+}
+
+.to-do {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px;
+    font-size: 1.1rem;
+}
+
+.to-do input {
+    margin: 0;
+}
+
+
+.project__dialog {
+    z-index: 2;
+    margin: auto;
+    height: 80dvh;
+    width: 70%;
+
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.item__dialog {
+    z-index: 3;
+    margin: auto;
+    height: 65dvh;
+    width: 45%;
+
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 2rem;
 }

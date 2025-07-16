@@ -76,9 +76,13 @@ class ManageProjects {
         this.projects.splice(idx, 1);
     }
 
-    getProyect(id) {
+    getProject(id) {
         const idx = this.projects.findIndex(obj => obj.id === id);
         return this.projects[idx];
+    }
+
+    getAllProjects() {
+        return this.projects.map(obj => obj);
     }
 }
 
