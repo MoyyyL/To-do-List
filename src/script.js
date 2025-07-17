@@ -11,6 +11,7 @@ class domProjectsManager {
     renderProjects() {
         const whole = this.projectManager.getAllProjects();
         const projectsWrapper = document.querySelector(".todo__projects-wrapper");
+        const dialog = document.querySelector(".project__dialog")
         projectsWrapper.innerHTML = " ";
         
         whole.forEach(obj => {
@@ -19,7 +20,8 @@ class domProjectsManager {
             project.dataset.id = obj.id
             
             const projectOpen = document.createElement("button");
-            projectOpen.classList.add("project__button")
+            projectOpen.classList.add("project__button");
+            projectOpen.addEventListener("click", () => dialog.showModal());
 
             const projectTitle = document.createElement("h2");
             projectTitle.textContent = obj.name;
