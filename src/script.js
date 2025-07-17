@@ -5,6 +5,7 @@ import {FormatDate} from "./timeManagement";
 class domProjectsManager {
     constructor() {
         this.projectManager = new ManageProjects();
+        this.domAdding();
     }
 
     renderProjects() {
@@ -31,21 +32,6 @@ class domProjectsManager {
             project.appendChild(projectHowMuchCont);
 
             projectsWrapper.appendChild(project);
-            
-            //todo Crear un texto que diga "n# elementos...." dependiendo del lenght del whole y evitar el listado que de por si no tiene funcionalidad
-
-            //project.innerHTML = `
-            //    <button class="project__button"></button>
-            //    <h2>${obj.name}</h2>
-            //    <ul class="project__list">
-            //        <li class="to-do">
-            //            <input type="checkbox" id="1"> //! neeed acces to individual id
-            //            <label for="1">Opcion 1</label> //!
-            //        </li>
-            //    </ul>
-            //`;
-
-            projectsWrapper.appendChild(project);
         })
     }
 
@@ -58,7 +44,15 @@ class domProjectsManager {
         this.projectManager.delProyect(id);
         this.renderProjects();
     }
+
+    domAdding() {
+        const addButton = document.querySelector(".create-project");
+        const nameInput = document.querySelector(".project-name");
+        addButton.addEventListener("click", () => {
+            const name = nameInput.value;
+            this.addProject(name);
+        })
+    }
 }
 
-const elpepe = new domProjectsManager();
-elpepe.addProject("añai");
+const aña = new domProjectsManager();

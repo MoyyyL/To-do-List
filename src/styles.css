@@ -39,6 +39,14 @@ h1 {
     border: 1px solid #0000003c;
     border-radius: 5px;
     font-size: 1rem;
+    cursor: pointer;
+}
+
+.project-name {
+    border: 1px solid #0000003c;
+    border-radius: 5px;
+    font-size: 1rem;
+    height: 2rem;
 }
 
 .create-project {
