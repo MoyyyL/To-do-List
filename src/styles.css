@@ -76,7 +76,8 @@ h1 {
     margin: 0;
 }
 
-.project__list {
+/*? Reutilizar para los dialog*/
+/* .project__list {
     padding: 0;
     list-style: none;
 }
@@ -92,7 +93,7 @@ h1 {
 .to-do input {
     margin: 0;
 }
-
+*/
 
 .project__dialog {
     z-index: 2;
