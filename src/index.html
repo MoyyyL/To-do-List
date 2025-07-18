@@ -9,7 +9,18 @@
     <main>
 
         <dialog class="project__dialog">
-            <h2>Project dialog</h2>
+            <button class="project__dialog-close">X</button>
+            <div class="project__dialog-headerAndButtons">
+                <h2>Project dialog</h2>
+                <button class="add-task">Add task</button>
+            </div>
+
+            <ul class="project__dialog-list">
+                <li class="to-do">
+                    <input type="checkbox" class="todo__check">
+                    <button class="todo__button">Task 1</button> 
+                </li>
+            </ul>
         </dialog>
 
         <dialog class="item__dialog">
@@ -30,15 +41,6 @@
                 <button class="project__button"></button>
                 <h2>title</h2>
                 <p>25 mil elementos...</p>
-
-                <!--? Reutilizar para dentro de los dialog
-                <ul class="project__list">
-                    <li class="to-do">
-                        <input type="checkbox" id="1">
-                        <label for="1">Opcion 1</label> 
-                    </li>
-                </ul>
-                -->
             </div>
             
         

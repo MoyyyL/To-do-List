@@ -1,1 +1,0 @@
-const elpepe = document.querySelector("")

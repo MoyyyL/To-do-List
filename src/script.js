@@ -58,3 +58,4 @@ class domProjectsManager {
 }
 
 const aña = new domProjectsManager();
+aña.addProject("asd")
