@@ -4,6 +4,7 @@ import { domProjectsManager } from "./projectManager";
 class domIndividualProject {
     constructor() {
         this.controller = new domProjectsManager();
+        this.autoLogic = this.dialogLogic();
         this.aa = this.asd();
     }
 
@@ -55,22 +56,26 @@ class domIndividualProject {
 
         this.renderDialog(id);
     }
+
+    dialogLogic() {
+        const dialog = document.querySelector(".project__dialog")
+        const closeDialog = document.querySelector(".project__dialog-close");
+        closeDialog.addEventListener("click", () => dialog.close());
+
+        const openProjectDialog = document.querySelector(".todo__projects-wrapper");
+        openProjectDialog.addEventListener("click", e => {
+            const id = e.target.parentElement.dataset.id;
+            this.renderDialog(id);
+        })
+
+        const dialogAddTask = document.querySelector(".add-task");
+        dialogAddTask.addEventListener("click", e => {
+            const id = e.target.dataset.id;
+            this.addTask(id);
+        })
+    }
 }
 
 const start = new domIndividualProject();
 
-const dialog = document.querySelector(".project__dialog")
-const closeDialog = document.querySelector(".project__dialog-close");
-closeDialog.addEventListener("click", () => dialog.close());
 
-const openProjectDialog = document.querySelector(".todo__projects-wrapper");
-openProjectDialog.addEventListener("click", e => {
-    const id = e.target.parentElement.dataset.id;
-    start.renderDialog(id);
-})
-
-const dialogAddTask = document.querySelector(".add-task");
-dialogAddTask.addEventListener("click", e => {
-    const id = e.target.dataset.id;
-    start.addTask(id);
-})
