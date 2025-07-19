@@ -45,6 +45,10 @@ class domProjectsManager {
         this.renderProjects();
     }
 
+    getIndividualProject(id) {
+        return this.projectManager.getProject(id);
+    }
+
     domAdding() {
         const addButton = document.querySelector(".create-project");
         const nameInput = document.querySelector(".project-name");
