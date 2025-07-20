@@ -175,3 +175,40 @@ h1 {
     left: 49%;
     background-color: peachpuff;
 }
+
+.item__dialog-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 1.7rem;
+    font-size: 1.2rem;
+}
+
+.item__dialog-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.item__dialog-item input, .item__dialog-item textarea, .item__dialog-item select, .item__dialog-addTask {
+    background-color: #00000053;
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    flex: 2 0 30px;
+    resize: none;
+    font-size: 1.1rem;
+    font-family: monospace;
+}
+
+.item__dialog-addTask {
+    cursor: pointer;
+    background-color: #d1d1d153;
+}
+
+.item__dialog-item:nth-child(2) {
+    height: 12ch;
+}
+
+.item__dialog-item textarea {
+    font-size: 1rem;
+}

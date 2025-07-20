@@ -1,5 +1,6 @@
 import "./styles.css";
 import { domProjectsManager } from "./projectManager";
+import { renderItemDialogAddNew } from "./addTaskItemDialog";
 
 class domIndividualProject {
     constructor() {
@@ -27,6 +28,10 @@ class domIndividualProject {
 
         const addButton = document.querySelector(".add-task")
         addButton.dataset.id = id;
+        addButton.addEventListener("click", () => {
+            renderItemDialogAddNew(id);
+            this.itemDialogLogic();
+        });
 
         const list = document.querySelector(".project__dialog-list");
         list.innerHTML = " ";
@@ -50,11 +55,30 @@ class domIndividualProject {
         })
     }
 
-    addTask(id) {
+    addTask(id, title, description, date, priority) {
         const currentProject = this.controller.getIndividualProject(id);
-        currentProject.addItem("ababa", "asd", "1-1-2222", "asd"); // provisional en lo que hago la logica de captacion de la informacion
-
+        currentProject.addItem(title, description, date, priority); //todo provisional en lo que hago la logica de captacion de la informacion
+        
+        console.log(currentProject);
+        
         this.renderDialog(id);
+    }
+
+    itemDialogLogic() {
+        const itemDialogAddTask = document.querySelector(".item__dialog-addTask");
+        itemDialogAddTask.addEventListener("click", (e) => {
+            e.preventDefault();
+            const title = document.querySelector("#Title");
+            const description = document.querySelector("#Description");
+            const dueDate = document.querySelector("#dueDate");
+            const priority = document.querySelector("#Priority");
+            const id = e.target.dataset.id;
+            
+            this.addTask(id, title.value, description.value, dueDate.value, priority.value);
+            const itemDialog = document.querySelector(".item__dialog");
+            itemDialog.close();
+        })
+
     }
 
     dialogLogic() {
@@ -68,10 +92,10 @@ class domIndividualProject {
             this.renderDialog(id);
         })
 
-        const dialogAddTask = document.querySelector(".add-task");
-        dialogAddTask.addEventListener("click", e => {
-            const id = e.target.dataset.id;
-            this.addTask(id);
+        const openItemDialog = document.querySelector(".add-task");
+        openItemDialog.addEventListener("click", e => {
+            const itemDialog = document.querySelector(".item__dialog");
+            itemDialog.showModal();
         })
     }
 }
