@@ -1,4 +1,4 @@
-function renderItemDialogAddNew(id) {
+function renderTaskDialog(id) {
     const itemDialog = document.querySelector(".item__dialog");
     itemDialog.innerHTML = " ";
     itemDialog.innerHTML = `
@@ -25,11 +25,13 @@ function renderItemDialogAddNew(id) {
                 </select>
             </div>
             <div class="item__dialog-item">
-                <input type="submit" class="item__dialog-addTask" value="Add" data-id=${id}>
+                <input type="submit" class="save" value="Save" data-id=${id}>
+                <input type="submit" class="delete" value="Delete" data-id=${id}>
+
             </div>
 
         </form>
     `;
 }
 
-export {renderItemDialogAddNew}
+export {renderTaskDialog}

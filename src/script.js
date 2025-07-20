@@ -1,6 +1,7 @@
 import "./styles.css";
 import { domProjectsManager } from "./projectManager";
 import { renderItemDialogAddNew } from "./addTaskItemDialog";
+import { renderTaskDialog } from "./taskDialog";
 
 class domIndividualProject {
     constructor() {
@@ -46,7 +47,12 @@ class domIndividualProject {
 
             const task = document.createElement("button");
             task.classList.add("todo__button");
+            task.dataset.id = obj.id; //!
             task.textContent = obj.title;
+            task.addEventListener("click", (e) => {
+                console.log(e.target)
+                this.taskHandler(e.id);
+            })
 
             toDo.appendChild(checkbox);
             toDo.appendChild(task)
@@ -57,13 +63,15 @@ class domIndividualProject {
 
     addTask(id, title, description, date, priority) {
         const currentProject = this.controller.getIndividualProject(id);
-        currentProject.addItem(title, description, date, priority); //todo provisional en lo que hago la logica de captacion de la informacion
+        currentProject.addItem(title, description, date, priority);
         
         console.log(currentProject);
         
         this.renderDialog(id);
     }
 
+
+    // ASSINGING ADDEVENT LISTENER TO EACH OF THE DIALOGS
     itemDialogLogic() {
         const itemDialogAddTask = document.querySelector(".item__dialog-addTask");
         itemDialogAddTask.addEventListener("click", (e) => {
@@ -78,7 +86,14 @@ class domIndividualProject {
             const itemDialog = document.querySelector(".item__dialog");
             itemDialog.close();
         })
+    }
 
+    taskHandler(id) {
+        const currentProject = this.controller.getIndividualProject(id);
+        
+        const taskDialog = document.querySelector(".item__dialog");
+        renderTaskDialog(id);
+        taskDialog.showModal();
     }
 
     dialogLogic() {

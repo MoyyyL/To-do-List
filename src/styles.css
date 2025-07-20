@@ -212,3 +212,8 @@ h1 {
 .item__dialog-item textarea {
     font-size: 1rem;
 }
+
+/*OTRA INTERFAZ DEL MISMO*/
+.delete {
+    background-color: #ff666668 !important;
+}
