@@ -1,7 +1,7 @@
 import "./styles.css";
-import { domProjectsManager } from "./projectManager"; // importa la funcion principal para manejar los proyectos
-import { renderItemDialogAddNew } from "./addTaskItemDialog"; // importa la plantilla para renderizar el dialog para crear una nueva task
-import { renderTaskDialog } from "./taskDialog"; // importa la plantilla para renderizar el dialog para editar una task
+import { domProjectsManager } from "./projectManager.js"; // importa la funcion principal para manejar los proyectos
+import { renderItemDialogAddNew } from "./addTaskItemDialog.js"; // importa la plantilla para renderizar el dialog para crear una nueva task
+import { renderTaskDialog } from "./taskDialog.js"; // importa la plantilla para renderizar el dialog para editar una task
 
 class domIndividualProject {
     constructor() {
