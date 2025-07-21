@@ -21,18 +21,18 @@ class domIndividualProject {
         all[1].addItem("asd", "sech", "1-1-2020", "sex");
     }
     
-    renderDialog(id) { //* renderiza el proyecto actual
-        const currentProject = this.controller.getIndividualProject(id); //consigue el proyecto individual
+    renderDialog(projectId) { //* renderiza el proyecto actual
+        const currentProject = this.controller.getIndividualProject(projectId); //consigue el proyecto individual
 
         const projectTitle = document.querySelector(".project__dialog-headerAndButtons h2");
         projectTitle.textContent = currentProject.name
 
         const addButton = document.querySelector(".add-task")
-        addButton.dataset.id = id; //asigna el id del proyecto actual al boton "add";
+        addButton.dataset.id = projectId; //asigna el id del proyecto actual al boton "add";
         
         //! ----------------------------------
         addButton.addEventListener("click", () => { // asigna un event listener que ejecuta la funcion para renderizar la version de creacion
-            renderItemDialogAddNew(id); // el id asignado es el mismo que el del proyecto actual para poder agregar la task al proyecto
+            renderItemDialogAddNew(projectId); // el id asignado es el mismo que el del proyecto actual para poder agregar la task al proyecto
             this.itemDialogLogic(); // asigna eventListener a los elemento del dialog despues de haber sido creado
         });
 
@@ -52,8 +52,7 @@ class domIndividualProject {
             task.dataset.id = obj.id; //! asigna el id de LA TASK al boton
             task.textContent = obj.title;
             task.addEventListener("click", (e) => { //cuando demos click a la task se ejecuta la funcion que renderiza el dialog y asigna el id de la TASK
-                console.log(e.target)
-                this.taskHandler(e.id);
+                this.taskHandler(obj.id, projectId);
             })
 
             toDo.appendChild(checkbox);
@@ -83,20 +82,53 @@ class domIndividualProject {
             const description = document.querySelector("#Description");
             const dueDate = document.querySelector("#dueDate");
             const priority = document.querySelector("#Priority");
-            const id = e.target.dataset.id;
+            const projectId = e.target.dataset.id;
             
             // llama a la funcion addTask
-            this.addTask(id, title.value, description.value, dueDate.value, priority.value);
+            this.addTask(projectId, title.value, description.value, dueDate.value, priority.value);
             const itemDialog = document.querySelector(".item__dialog");
             itemDialog.close();
         })
     }
 
-    taskHandler(id) { //! solo se ejecuta al dar click a una task
-        const currentProject = this.controller.getIndividualProject(id);
-        
+    taskHandler(taskId, projectId) { //! solo se ejecuta al dar click a una task
+        const currentProject = this.controller.getIndividualProject(projectId);
+        const currentTask = currentProject.getItem(taskId);
+
         const taskDialog = document.querySelector(".item__dialog");
-        renderTaskDialog(id);
+        renderTaskDialog(taskId);
+
+        const title = document.querySelector("#Title");
+        const desc = document.querySelector("#Description");
+        const date = document.querySelector("#dueDate");
+        const priority = document.querySelector("#Priority");
+
+        title.value = currentTask.title;
+        desc.value = currentTask.description;
+        date.value = currentTask.dueDate;
+        priority.value = currentTask.priority;
+
+        const save = document.querySelector(".save");
+        save.addEventListener("click", (e) => {
+            e.preventDefault();
+            currentTask.title = title.value;
+            currentTask.description = desc.value;
+            currentTask.dueDate = date.value;
+            currentTask.priority = priority.value;
+
+            this.renderDialog(projectId);
+            taskDialog.close();
+        })
+
+        const delButton = document.querySelector(".delete");
+        delButton.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            currentProject.delItem(taskId);
+            this.renderDialog(projectId);
+            taskDialog.close()
+        });
+
         taskDialog.showModal();
     }
 
