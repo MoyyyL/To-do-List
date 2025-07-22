@@ -7,19 +7,19 @@ class domIndividualProject {
     constructor() {
         this.controller = new domProjectsManager();
         this.autoLogic = this.dialogLogic();
-        this.aa = this.asd(); // para crear elemento ficticios
+        //this.aa = this.asd(); // para crear elemento ficticios
     }
 
-    asd() {
-        this.controller.addProject("proyecto piloto"); //crea proyecto
-        this.controller.addProject("ya llego sech"); //otro proyecto
-        const all = this.controller.projectManager.getAllProjects() //consigue todos los proyectos
-        all[0].addItem("elpepe", "asd", "1-1-2010", "sex"); // agrega tasks al primer proyecto
-        all[0].addItem("tilin", "asd", "1-1-2010", "sex");
-        all[0].addItem("sech", "asd", "1-1-2010", "sex");
-
-        all[1].addItem("asd", "sech", "1-1-2020", "sex");
-    }
+    //asd() {
+    //    this.controller.addProject("proyecto piloto"); //crea proyecto
+    //    this.controller.addProject("ya llego sech"); //otro proyecto
+    //    const all = this.controller.projectManager.getAllProjects() //consigue todos los proyectos
+    //    all[0].addItem("elpepe", "asd", "1-1-2010", "sex"); // agrega tasks al primer proyecto
+    //    all[0].addItem("tilin", "asd", "1-1-2010", "sex");
+    //    all[0].addItem("sech", "asd", "1-1-2010", "sex");
+//
+    //    all[1].addItem("asd", "sech", "1-1-2020", "sex");
+    //}
     
     renderDialog(projectId) { //* renderiza el proyecto actual
         const currentProject = this.controller.getIndividualProject(projectId); //consigue el proyecto individual
@@ -65,6 +65,7 @@ class domIndividualProject {
     addTask(id, title, description, date, priority) { 
         const currentProject = this.controller.getIndividualProject(id); // toma el current proyect
         currentProject.addItem(title, description, date, priority); // usa la funcion addItem y agrega los datos
+        this.controller.saveLocal()
         
         console.log(currentProject);
         
@@ -152,5 +153,6 @@ class domIndividualProject {
 }
 
 const start = new domIndividualProject();
-
+console.log(start.controller.projectManager.getAllProjects())
+localStorage.clear();
 

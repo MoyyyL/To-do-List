@@ -1,5 +1,3 @@
-import { addSeconds } from "date-fns";
-
 class ToDoItem {
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -32,7 +30,7 @@ class ToDoItem {
 
 class ToDoProject {
     constructor(name) {
-        this.name = name
+        this.name = name;
         this.content = [];
         this._proyectId = crypto.randomUUID();
     }
@@ -50,12 +48,12 @@ class ToDoProject {
     checkItem(id) {
         const idx = this.content.findIndex(obj => obj.id === id);
         const value = this.content[idx].check;
-        this.content[idx].check = !value
+        this.content[idx].check = !value;
     }
 
     getItem(id) {
         const idx = this.content.findIndex(obj => obj.id === id);
-        return this.content[idx]
+        return this.content[idx];
     }
 
     get id() {
@@ -65,27 +63,61 @@ class ToDoProject {
 
 class ManageProjects {
     constructor() {
-        this.projects = [];
+        this.projects = this.getLocal(); // reconstruye desde localStorage
     }
 
     createProject(name) {
         const newProject = new ToDoProject(name);
         this.projects.push(newProject);
+        this.saveLocal(); // guardar cambios
     }
 
     delProyect(id) {
         const idx = this.projects.findIndex(obj => obj.id === id);
-        this.projects.splice(idx, 1);
+        if (idx !== -1) {
+            this.projects.splice(idx, 1);
+            this.saveLocal();
+        }
     }
 
     getProject(id) {
-        const idx = this.projects.findIndex(obj => obj.id === id);
-        return this.projects[idx];
+        return this.projects.find(obj => obj.id === id);
     }
 
     getAllProjects() {
-        return this.projects.map(obj => obj);
+        return this.projects;
+    }
+
+    saveLocal() {
+        localStorage.setItem("allProjects", JSON.stringify(this.projects));
+    }
+
+    getLocal() {
+        const raw = localStorage.getItem("allProjects");
+        if (!raw) return [];
+
+        const parsed = JSON.parse(raw);
+
+        // Reconstruir instancias reales de ToDoProject y ToDoItem
+        return parsed.map(projectData => {
+            const project = new ToDoProject(projectData.name);
+            project._proyectId = projectData._proyectId;
+
+            projectData.content.forEach(taskData => {
+                const task = new ToDoItem(
+                    taskData.title,
+                    taskData.description,
+                    taskData._dueDate,
+                    taskData.priority
+                );
+                task._id = taskData._id;
+                task._check = taskData._check;
+                project.content.push(task);
+            });
+
+            return project;
+        });
     }
 }
 
-export {ManageProjects, ToDoProject, ToDoItem};
+export { ManageProjects, ToDoProject, ToDoItem };

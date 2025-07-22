@@ -4,6 +4,7 @@ class domProjectsManager {
     constructor() {
         this.projectManager = new ManageProjects();
         this.domAdding();
+        this.renderProjects();
     }
 
     renderProjects() {
@@ -11,7 +12,7 @@ class domProjectsManager {
         const projectsWrapper = document.querySelector(".todo__projects-wrapper");
         const dialog = document.querySelector(".project__dialog")
         projectsWrapper.innerHTML = " ";
-        
+
         whole.forEach(obj => {
             const project = document.createElement("div");
             project.classList.add("todo__project");
@@ -56,6 +57,10 @@ class domProjectsManager {
             const name = nameInput.value;
             this.addProject(name);
         })
+    }
+
+    saveLocal() {
+        this.projectManager.saveLocal();
     }
 }
 
