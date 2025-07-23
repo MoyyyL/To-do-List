@@ -2,6 +2,7 @@ import "./styles.css";
 import { domProjectsManager } from "./projectManager.js"; // importa la funcion principal para manejar los proyectos
 import { renderItemDialogAddNew } from "./addTaskItemDialog.js"; // importa la plantilla para renderizar el dialog para crear una nueva task
 import { renderTaskDialog } from "./taskDialog.js"; // importa la plantilla para renderizar el dialog para editar una task
+import { FormatDate } from "./timeManagement.js";
 
 class domIndividualProject {
     constructor() {
@@ -9,17 +10,6 @@ class domIndividualProject {
         this.autoLogic = this.dialogLogic();
         //this.aa = this.asd(); // para crear elemento ficticios
     }
-
-    //asd() {
-    //    this.controller.addProject("proyecto piloto"); //crea proyecto
-    //    this.controller.addProject("ya llego sech"); //otro proyecto
-    //    const all = this.controller.projectManager.getAllProjects() //consigue todos los proyectos
-    //    all[0].addItem("elpepe", "asd", "1-1-2010", "sex"); // agrega tasks al primer proyecto
-    //    all[0].addItem("tilin", "asd", "1-1-2010", "sex");
-    //    all[0].addItem("sech", "asd", "1-1-2010", "sex");
-//
-    //    all[1].addItem("asd", "sech", "1-1-2020", "sex");
-    //}
     
     renderDialog(projectId) { //* renderiza el proyecto actual
         const currentProject = this.controller.getIndividualProject(projectId); //consigue el proyecto individual
@@ -104,9 +94,12 @@ class domIndividualProject {
         const date = document.querySelector("#dueDate");
         const priority = document.querySelector("#Priority");
 
+        const dateObj = new Date(currentTask.dueDate);
+        const formattedDate = FormatDate(dateObj);
+
         title.value = currentTask.title;
         desc.value = currentTask.description;
-        date.value = currentTask.dueDate;
+        date.value = formattedDate;
         priority.value = currentTask.priority;
 
         const save = document.querySelector(".save");
@@ -126,8 +119,9 @@ class domIndividualProject {
             e.preventDefault();
 
             currentProject.delItem(taskId);
+            this.controller.saveLocal();
             this.renderDialog(projectId);
-            taskDialog.close()
+            taskDialog.close();
         });
 
         taskDialog.showModal();
@@ -140,6 +134,8 @@ class domIndividualProject {
 
         const openProjectDialog = document.querySelector(".todo__projects-wrapper"); 
         openProjectDialog.addEventListener("click", e => { // al abrir un proyecto, asigna el id del PROYECTO y lo renderiza
+            if (e.target.parentElement.dataset.id == undefined) return;
+            
             const id = e.target.parentElement.dataset.id;
             this.renderDialog(id);
         })
@@ -153,6 +149,4 @@ class domIndividualProject {
 }
 
 const start = new domIndividualProject();
-console.log(start.controller.projectManager.getAllProjects())
-localStorage.clear();
-
+console.log(start.controller.projectManager.getAllProjects());
