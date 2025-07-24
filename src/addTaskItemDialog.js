@@ -1,7 +1,7 @@
 function renderItemDialogAddNew(id) {
-    const itemDialog = document.querySelector(".item__dialog");
-    itemDialog.innerHTML = " ";
-    itemDialog.innerHTML = `
+  const itemDialog = document.querySelector(".item__dialog");
+  itemDialog.innerHTML = " ";
+  itemDialog.innerHTML = `
         <form class="item__dialog-wrapper">
 
             <div class="item__dialog-item">
@@ -32,4 +32,4 @@ function renderItemDialogAddNew(id) {
     `;
 }
 
-export {renderItemDialogAddNew}
+export { renderItemDialogAddNew };

@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do list</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
+      <dialog class="project__dialog">
+        <button class="project__dialog-close">X</button>
 
-        <dialog class="project__dialog">
-            <button class="project__dialog-close">X</button>
-
-            <div class="project__dialog-headerAndButtons">
-                <h2>Project dialog</h2>
-                <button class="add-task">Add task</button>
-            </div>
-
-            <ul class="project__dialog-list">
-                <li class="to-do">
-                    <input type="checkbox" class="todo__check">
-                    <button class="todo__button">Task 1</button> 
-                </li>
-            </ul>
-        </dialog>
-        
-        <!--todo cambiar los botones por editar y eliminar nadamas -->
-        <dialog class="item__dialog">
-            
-        </dialog>
-        <!--todo CHAMBA -->
-
-        <div class="title-buttons">
-            <h1>To-Do list</h1>
-            <div class="inputs-wrapper">
-                <input type="text" class="project-name" placeholder="Name">
-                <button class="create-project">Create Project</button>
-            </div>
+        <div class="project__dialog-headerAndButtons">
+          <h2>Project dialog</h2>
+          <button class="add-task">Add task</button>
         </div>
 
-        <div class="todo__projects-wrapper">
+        <ul class="project__dialog-list">
+          <li class="to-do">
+            <input type="checkbox" class="todo__check" />
+            <button class="todo__button">Task 1</button>
+          </li>
+        </ul>
+      </dialog>
 
-            <div class="todo__project">
-                <button class="project__button"></button>
-                <h2>title</h2>
-                <p>25 mil elementos...</p>
-            </div>
-            
-        
+      <!--todo cambiar los botones por editar y eliminar nadamas -->
+      <dialog class="item__dialog"></dialog>
+      <!--todo CHAMBA -->
+
+      <div class="title-buttons">
+        <h1>To-Do list</h1>
+        <div class="inputs-wrapper">
+          <input type="text" class="project-name" placeholder="Name" />
+          <button class="create-project">Create Project</button>
         </div>
+      </div>
+
+      <div class="todo__projects-wrapper">
+        <div class="todo__project">
+          <button class="project__button"></button>
+          <h2>title</h2>
+          <p>25 mil elementos...</p>
+        </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>
